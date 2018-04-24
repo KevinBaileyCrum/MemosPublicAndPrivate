@@ -47,6 +47,18 @@ def delete():
         db(q).delete()
     redirect(URL('default', 'index'))
 
+@auth.requires_login()
+@auth.requires_signature()
+def toggle_public():
+    if request.args(0) is not None:
+        q = ((db.checklist.user_email == auth.user.email) &
+             (db.checklist.id == request.args(0)))
+        cl = db(q).select().first()
+        print(cl.is_public)
+        cl.update_record(is_public = not 'is_public' )
+        print(cl.is_public)
+    redirect(URL('default','index'))
+
 
 @auth.requires_login()
 def edit():
