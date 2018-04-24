@@ -17,12 +17,14 @@ db.define_table('checklist',
                 Field('user_email', default=get_user_email()),
                 Field('title'),
                 Field('memo', 'text'),
-                Field('is_public', 'boolean'),
+                Field('is_public', 'boolean', default=False),
                 Field('updated_on', 'datetime', update=datetime.datetime.utcnow())
                 )
 
 db.checklist.user_email.writable = False
 db.checklist.user_email.readable = False
+db.checklist.is_public.readable  = False
+db.checklist.is_public.writable  = False
 db.checklist.updated_on.writable = db.checklist.updated_on.readable = False
 db.checklist.id.writable = db.checklist.id.readable = False
 
