@@ -7,15 +7,18 @@
 
   <!-- Here goes your main HTML code. -->
   {{if auth.user is not None:}}
-
+  <!-- if you are logged on, iterate through checklists and display public --> 
+  <!-- and private -->
+  <!--   public: if you own it: --> 
+  <!--               you can toggle -->
+  <!--           else: disabled -->
+  <!--   private: you can see yours and toggle yours -->
   <div class="add_btn">
     <a class="btn red rounded" href="{{=URL('default', 'add')}}"><i class="fa fa-plus"></i> Add</a>
   </div>
 
   {{for cl in checklists:}}
     {{if cl.is_public is True or cl.user_email == auth.user.email:}} 
-    {{print( cl.user_email)}}
-    {{print( auth.user.email)}}
 
       <div class="memo">
         <div class="memo_text">
@@ -71,6 +74,9 @@
 
   {{else:}}
    <h1 class="main_title">Welcome!</h1>
+  <!-- if you are !logged on, iterate through checklists and display public --> 
+  <!--   public: can read, !toggle --> 
+  <!--   private: !read -->
 
     <p class="explanation">This site will help you organize your life by storing your checklists.
         Please log in to use it.</p>

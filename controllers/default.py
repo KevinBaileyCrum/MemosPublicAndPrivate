@@ -14,12 +14,13 @@ def index():
     example action using the internationalization operator T and flash
     rendered by views/default/index.html or views/generic.html
 
-    #checklists = db(db.checklist.is_public == True).select(db.checklist.ALL)
-    im keeping these old methods here, dont ask why
-    # checklists = db(db.checklist.user_email == auth.user.email).select()
-
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
+
+    The code returns the same thing regardless of auth.user
+    index() returns the whole list of memos and lets
+    index.html deal with displaying the data. see index.html
+    for more details
     """
     logger.info('The session is: %r' % session)
     checklists = None
