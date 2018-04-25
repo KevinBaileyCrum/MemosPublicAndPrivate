@@ -14,13 +14,19 @@ def index():
     example action using the internationalization operator T and flash
     rendered by views/default/index.html or views/generic.html
 
+    #checklists = db(db.checklist.is_public == True).select(db.checklist.ALL)
+    im keeping these old methods here, dont ask why
+    # checklists = db(db.checklist.user_email == auth.user.email).select()
+
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
     logger.info('The session is: %r' % session)
     checklists = None
     if auth.user is not None:
-        checklists = db(db.checklist.user_email == auth.user.email).select()
+        checklists = db(db.checklist).select()
+    else:
+        checklists = db(db.checklist).select()
     return dict(checklists=checklists)
 
 
