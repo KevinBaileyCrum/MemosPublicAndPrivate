@@ -46,6 +46,16 @@ header, main, footer {display:block; with:100%} /* IE fix */
 .btn.large {padding:1em 2em; font-size:1.2em}
 .oval {border-radius:50%}
 
+.btn_null{
+    button,
+    type=button,
+    type=disabled,
+    pointer-events: none,
+    cursor: none;
+}
+
+
+
 /*** helpers ***/
 .rounded {-moz-border-radius:5px; border-radius:5px}
 .padded {padding:10px 20px}

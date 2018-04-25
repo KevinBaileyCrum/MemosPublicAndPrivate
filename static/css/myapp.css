@@ -41,3 +41,20 @@ div.memo div.button_list div.buttons {
 div.memo div.button_list a.btn {
   padding: 10px;
 }
+
+a.btn_null {
+    button;
+    type=button;
+    type=disabled;
+    
+    pointer-events: none;
+    cursor: none;
+}
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
+
+
+
