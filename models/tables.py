@@ -23,7 +23,7 @@ db.define_table('checklist',
 
 db.checklist.user_email.writable = False
 db.checklist.user_email.readable = False
-db.checklist.is_public.readable  = False
+db.checklist.is_public.readable  = True
 db.checklist.is_public.writable  = True
 db.checklist.updated_on.writable = db.checklist.updated_on.readable = False
 db.checklist.id.writable = db.checklist.id.readable = False

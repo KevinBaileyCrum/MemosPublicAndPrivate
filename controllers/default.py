@@ -21,6 +21,8 @@ def index():
     checklists = None
     if auth.user is not None:
         checklists = db(db.checklist.user_email == auth.user.email).select()
+    else:
+        checklists = db(db.checklist.is_public is True).select(db.checklist.ALL)
     return dict(checklists=checklists)
 
 
