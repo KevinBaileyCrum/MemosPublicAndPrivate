@@ -55,7 +55,10 @@ def toggle_public():
              (db.checklist.id == request.args(0)))
         cl = db(q).select().first()
         print(cl.is_public)
-        cl.update_record(is_public = not 'is_public' )
+        if cl.is_public is False:
+            cl.update_record(is_public = True)
+        else:
+            cl.update_record(is_public = False)
         print(cl.is_public)
     redirect(URL('default','index'))
 
