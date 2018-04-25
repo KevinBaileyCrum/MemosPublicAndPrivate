@@ -13,6 +13,10 @@
   </div>
 
   {{for cl in checklists:}}
+    {{if cl.is_public is True or cl.user_email == auth.user.email:}} 
+    {{print( cl.user_email)}}
+    {{print( auth.user.email)}}
+
       <div class="memo">
         <div class="memo_text">
           <div class="memo_title">{{=cl.title}}</div>
@@ -21,23 +25,43 @@
         <div>
           <div class="button_list">
             <div class="buttons">
-              <a class="btn rounded" href="{{=URL('default', 'edit', args=[cl.id])}}">
-                <i class="fa fa-edit fa-lg"></i>
-              </a>
-              {{if cl.is_public is True:}}
-                <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
-                <i class="fa fa-users"></i>
+              {{if cl.user_email != auth.user.email:}}
+                    <a class="btn_null rounded black disabled" >
+                        <i class="fa fa-edit fa-lg"></i>
+                    </a>
+                  {{if cl.is_public is True:}}
+                    <a class="btn_null rounded black disabled" >
+                    <i class="fa fa-users"></i>
+                  {{elif cl.user_email == auth.user.email:}}
+                    <a class="btn_null rounded black disabled">
+                    <i class="fa fa-user"></i>
+                  {{pass}}
+                  <a class="btn_null rounded red black disabled">
+                    <i class="fa fa-trash fa-lg"></i>
+
               {{else:}}
-                <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
-                <i class="fa fa-user"></i>
+                <a class="btn rounded" href="{{=URL('default', 'edit', args=[cl.id])}}">
+                    <i class="fa fa-edit fa-lg"></i>
+                </a>
+                {{if cl.is_public is True:}}
+                    <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
+                    <i class="fa fa-users"></i>
+                {{elif cl.user_email == auth.user.email:}}
+                    <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
+                    <i class="fa fa-user"></i>
+                {{pass}}
+                  <a class="btn rounded red" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}">
+                    <i class="fa fa-trash fa-lg"></i>
               {{pass}}
-              <a class="btn rounded red" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}">
-                <i class="fa fa-trash fa-lg"></i>
+
+
+
               </a>
             </div>
           </div>
         </div>
       </div>
+      {{pass}}
   {{pass}}
 
   {{if not checklists:}}
@@ -64,18 +88,18 @@
             </div>
             <div>
               <div class="button_list">
-                <div class="buttons">
-                  <a class="btn rounded" href="{{=URL('default', 'edit', args=[cl.id])}}">
-                    <i class="fa fa-edit fa-lg"></i>
+                <div class="buttons" >
+                  <a class="btn_null rounded black disabled">
+                    <i class="fa fa-edit fa-lg" ></i>
                   </a>
                   {{if cl.is_public is True:}}
-                    <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
-                    <i class="fa fa-users"></i>
+                    <a class="btn_null rounded black disabled" >
+                    <i class="fa fa-users"style="cursor:none"></i>
                   {{else:}}
-                    <a class="btn rounded" href="{{=URL('default', 'toggle_public', args=[cl.id], user_signature=True)}}">
+                    <a class="btn_null rounded black disabled" >
                     <i class="fa fa-user"></i>
                   {{pass}}
-                  <a class="btn rounded red" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}">
+                  <a class="btn_null rounded black disabled" >
                     <i class="fa fa-trash fa-lg"></i>
                   </a>
                 </div>
